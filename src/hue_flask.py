@@ -24,6 +24,12 @@ def set_color():
         response.message("Haha... please use a color that contains light.")
         return str(response)
 
+    if color_name == "previous":
+        prev_color = getPreviousColor()
+        response = MessagingResponse()
+        response.message("The previous color was {}".format(clean_name(prev_color)))
+        return str(response)
+
     message = controller.set_color(color_name)
     percent = colorPercent(file,color_name)
     date = firstEntryDate(file)
@@ -31,6 +37,7 @@ def set_color():
     response.message(message + " This entry has been chosen " + str(percent) + "% of the time since " + date + "!")
     logging.info("Color " + color_name + " has been set by the phone number " + phone_number + ".")
     writeFile(file,str(phone_number), str(color_name), str(message))
+    updatePreviousColor(color_name)
 
     return str(response)
 @app.route('/recents',methods=['GET'])
