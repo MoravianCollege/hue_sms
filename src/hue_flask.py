@@ -3,7 +3,7 @@ from flask import Flask, request
 from hue_controller import HueController
 from name_converter import clean_name
 from data_writer import writeFile,colorPercent,mostRecentColors,numOfEachColor,invalidColors,firstEntryDate
-
+from previousRedisColor import getPreviousColor, updatePreviousColor
 import logging
 
 logging.basicConfig(level=logging.INFO,filename="hue_log.log",
