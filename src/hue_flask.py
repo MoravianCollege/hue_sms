@@ -30,6 +30,12 @@ def set_color():
         response.message("The previous color was {}".format(clean_name(prev_color)))
         return str(response)
 
+    if color_name == "colors":
+        colors_link = 'http://localhost:5000/colors'  # the link of the end point for '/colors'
+        response = MessagingResponse()
+        response.message("{}".format(colors_link))
+        return str(response)
+
     message = controller.set_color(color_name)
     percent = colorPercent(file,color_name)
     date = firstEntryDate(file)
@@ -49,6 +55,14 @@ def get_num_of_each():
 @app.route('/invalids',methods=['GET'])
 def get_invalids():
     return invalidColors(file)
+
+
+@app.route('/colors',methods=['GET'])
+def get_colors():
+    """return a html page that display the colors with their name"""
+    return
+
+
 if __name__ == '__main__':
     app.run()
     logging.info("Server has been stopped")
