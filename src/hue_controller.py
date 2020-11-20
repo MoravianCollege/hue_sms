@@ -30,12 +30,12 @@ class HueController:
         self.light = self.bridge.lights[1]
 
     def set_color(self, color_name):
-        try:
-            self.connect()
-        except PhueException:
-            logging.info("Server unable to connect to the Hue Light")
-            return "I'm sorry, but I cannot connect to the Hue Light." \
-                   "Please try again later."
+        # try:
+        #     self.connect()
+        # except PhueException:
+        #     logging.info("Server unable to connect to the Hue Light")
+        #     return "I'm sorry, but I cannot connect to the Hue Light." \
+        #            "Please try again later."
 
         rgb_values = getColor(color_name)
 
@@ -52,22 +52,22 @@ class HueController:
         converter = Converter()
         print(r, " ", g, " ", b)
         if r == 255 and b == 255 and g == 255:
-            saturation_val = 0
+            # saturation_val = 0
             [x, y] = converter.rgb_to_xy(r, g, b)
         else:
-            saturation_val = 255
+            # saturation_val = 255
             correction_value = 1.3
             r = ((r / 255) ** (1 / correction_value))
             g = ((g / 255) ** (1 / correction_value))
             b = ((b / 255) ** (1 / correction_value))
             [x, y] = converter.rgb_to_xy(r, g, b)
         try:
-            self.light.xy = (x, y)
-            self.light.saturation = saturation_val
+            # self.light.xy = (x, y)
+            # self.light.saturation = saturation_val
             logging.info("The light was changed to the color " + color_name)
             return "The light was changed to the color \"{}\"."\
                 .format(clean_name(color_name))
-        except PhueException:
+        except Exception:  #PhueException:
             logging.info("Server unable to connect to the Hue Light")
             return "I'm sorry, but I cannot connect to the Hue Light." \
                    "Please try again later."
