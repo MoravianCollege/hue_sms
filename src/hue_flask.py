@@ -3,7 +3,8 @@ from flask import Flask, request
 from hue_controller import HueController
 from name_converter import clean_name
 from data_writer import writeFile,colorPercent,mostRecentColors,numOfEachColor,invalidColors,firstEntryDate
-from previousRedisColor import getPreviousColor, updatePreviousColor
+from previousRedisColor import PreviousColorsRedis
+from colors_redis import colorsRedis
 import logging
 
 logging.basicConfig(level=logging.INFO,filename="hue_log.log",
@@ -25,7 +26,7 @@ def set_color():
         return str(response)
 
     if color_name == "previous":
-        prev_color = getPreviousColor()
+        prev_color = PreviousColorsRedis().getPreviousColor()
         response = MessagingResponse()
         response.message("The previous color was {}".format(clean_name(prev_color)))
         return str(response)
@@ -43,9 +44,12 @@ def set_color():
     response.message(message + " This entry has been chosen " + str(percent) + "% of the time since " + date + "!")
     logging.info("Color " + color_name + " has been set by the phone number " + phone_number + ".")
     writeFile(file,str(phone_number), str(color_name), str(message))
-    updatePreviousColor(color_name)
+    if colorsRedis().is_color(color_name):
+        PreviousColorsRedis().updatePreviousColor(color_name)
 
     return str(response)
+
+
 @app.route('/recents',methods=['GET'])
 def get_most_recent():
     return mostRecentColors(file)
