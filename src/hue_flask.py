@@ -1,9 +1,10 @@
 from twilio.twiml.messaging_response import MessagingResponse
-from flask import Flask, request
+from flask import Flask, request, render_template
 from hue_controller import HueController
 from name_converter import clean_name
 from data_writer import writeFile,colorPercent,mostRecentColors,numOfEachColor,invalidColors,firstEntryDate
 from previousRedisColor import PreviousColorsRedis
+from html_colors_generator import generate_colors_from_redis
 from colors_redis import colorsRedis
 import logging
 
@@ -64,7 +65,8 @@ def get_invalids():
 @app.route('/colors',methods=['GET'])
 def get_colors():
     """return a html page that display the colors with their name"""
-    return
+    colors = generate_colors_from_redis()
+    return render_template('displaycolors.html', colors= colors.items())
 
 
 if __name__ == '__main__':
