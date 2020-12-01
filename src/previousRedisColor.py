@@ -20,7 +20,6 @@ class PreviousColorsRedis:
         if not value:
             r.set("current", *kwargs)
             value = r.get("current")
-            print(value.decode(), 'getCurrent')
             return value.decode()
         return value.decode()
 
