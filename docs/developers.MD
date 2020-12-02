@@ -31,7 +31,7 @@ After the setup process, you must follow these steps in separate terminals to ru
 1. **Run the createRedis.py in the first terminal by running** `python3 createRedis.py` this step only needs to be completed once.
 2. **In a second terminal, run the redis server:** `redis-server`
 3. **In a third terminal, run the flask server:** `python3 hue_flask.py`
-4. **In a fourth terminal, run the demo:** `python3 demoVersion2.py` You must rerun this line of code each time.
+4. **In a fourth terminal, run the demo:** `python3 demo_version2.py` You must rerun this line of code each time.
 5. **When finished, end the redis and the hue flask servers:** `Ctrl+C`
 
 
