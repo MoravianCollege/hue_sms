@@ -6,3 +6,6 @@ eggs/
 .pytest_cache
 
 .env/
+.venv/
+
+.idea
