@@ -10,6 +10,7 @@ Developers, please see `docs/developers.MD` for cloning, setup, how to run the p
 ## Version 2: Additional Features  
    This project adds additional features that can be used so the user can gain more information about the previously chosen color as well as which colors can be texted to the hue light.
    This program can now take additional Strings as input, such as "previous" or "colors".
+   By the use of requests in demoVersion2.py, it allows us to interact with the 'hue_flask.py' server.
    1. When the client types "previous", the Twilio SMS service as well as its connection to the Flask server interacts with the Redis database to respond with the previously chosen color
    2. When the client types "colors", an html link is returned that includes all the possible colors and their respective names that can be chosen for the hue light.
 
