@@ -106,8 +106,6 @@ def setup():
                           id='colors-graph',
                           figure=fig
                       ),
-                      html.Div(children='''Text 484-895-1386 with your color! 
-                ''', style={'color': 'blue', 'fontSize': 35}),
                       dcc.Interval(
                           id='interval-component',
                           interval=1 * 1000,
@@ -124,20 +122,10 @@ def setup():
                     id='table-interval',
                     interval=1 * 1000,
                     n_intervals=0
-                ),
-                html.Img(
-                    src="https://www.moravian.edu/themes/modern/dist/images/logo.svg",
-                    height=100,
-                    style={'position': 'relative', 'top': '30px', 'left': '100px'}),
-                html.Footer(children='''Contributors: Andrew Carr ('19), Seth Coleman ('25), John Polich ('19), Jack Wagner ('23)
-                        ''', style={'position': 'relative', 'color': 'black', 'fontSize': 13, 'top': '150px'},
-                            dir='rtl'),
-            ],
-                className='five columns',
+                )
+            ], className='five columns'
             )
-        ],
-            className='row',
-        )])
+        ], className='row')])
 
 
 @app.callback(Output('colors-graph', 'figure'),
@@ -188,7 +176,15 @@ def update_table_live(n):
     table.update_layout(title='Recent Color Choices', title_x =.5, title_y=.93,font=dict(
         # change Font size for Table
         size=15,
-    ))
+    ) )
+    table.add_layout_image(
+        dict(
+            source="https://www.moravian.edu/themes/modern/dist/images/logo.svg",
+            x=.75, y=0.3,
+            sizex=0.5, sizey=0.35,
+            xanchor="right", yanchor="bottom"
+        )
+    )
     return table
 
 
